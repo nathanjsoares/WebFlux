@@ -17,7 +17,7 @@ public class PostService {
 
 	@Autowired
 	private PostRepository repository;
-
+/*
 	@Transactional(readOnly = true)
 	public PostDTO findById(String id) {
 		Post post = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
@@ -33,5 +33,5 @@ public class PostService {
 		maxDate = maxDate.plusSeconds(86400); // 24 * 60 * 60
 		List<PostDTO> result = repository.fullSearch(text, minDate, maxDate).stream().map(x -> new PostDTO(x)).toList();
 		return result;
-	}
+	} */
 }
