@@ -29,6 +29,14 @@ public class UserService {
 				.map(user -> new UserDTO(user))
 				.switchIfEmpty(Mono.error(new ResourceNotFoundException("User not found")));
 	}
+
+	@Transactional
+	public Mono<UserDTO> insert(UserDTO dto) {
+		User entity = new User();
+		copyDtoToEntity(dto, entity);
+		Mono<UserDTO> result = repository.save(entity).map(user -> new UserDTO(user));
+		return result;
+	}
 /*
 	@Transactional(readOnly = true)
 	public UserDTO findById(String id) {
@@ -66,9 +74,9 @@ public class UserService {
 				.orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
 		repository.delete(entity);
 	}
-
+	 */
 	private void copyDtoToEntity(UserDTO dto, User entity) {
 		entity.setName(dto.getName());
 		entity.setEmail(dto.getEmail());
-	} */
+	}
 }
