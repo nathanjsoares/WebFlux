@@ -50,12 +50,8 @@ public class UserController {
 		return service.update(id, dto).map(userUpdated -> ResponseEntity.ok(userUpdated));
 	}
 
-
-/*
-
 	@DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable String id) {
-        service.delete(id);
-        return ResponseEntity.noContent().build();
-    } */
+	public Mono<ResponseEntity<Void>> delete(@PathVariable String id) {
+		return service.delete(id).then(Mono.just(ResponseEntity.noContent().<Void>build())) ;
+	}
 }
